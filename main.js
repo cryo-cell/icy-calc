@@ -34,8 +34,11 @@ buttons.map( button => {
 
 
 window.addEventListener("keydown", function(event) {
-    
-    display.innerText += `${event.key}`;
-    display.appendChild(display.innerText);
+    let displayRegex = /\d/g;
+    let result = event.key.match(displayRegex);
+    if (event.key === "Backspace") {
+        display.innerText = display.innerText.slice(0, -1);} else if(result) {
+        display.innerText += `${event.key}`;
+        display.appendChild(display.innerText);} return false;
   }, true);
   
