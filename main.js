@@ -33,11 +33,9 @@ buttons.map( button => {
 
 
 
-
-const p = document.createElement("p");  
-
 window.addEventListener("keydown", function(event) {
     
-    p.textContent += `${event.key}`;
-    display.appendChild(p);
+    display.innerText += `${event.key}`;
+    display.appendChild(display.innerText);
   }, true);
+  
