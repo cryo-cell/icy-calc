@@ -17,7 +17,7 @@ buttons.map( button => {
                 try {
                     display.innerText = eval(display.innerText);
                 } catch {
-                    display.innerText = "Error";
+                    display.innerText = "Error!";
                 }
                 break;
             default:
@@ -25,4 +25,19 @@ buttons.map( button => {
         }
     });
 
+
+      
+
 });
+
+
+
+
+
+const p = document.createElement("p");  
+
+window.addEventListener("keydown", function(event) {
+    
+    p.textContent += `${event.key}`;
+    display.appendChild(p);
+  }, true);
