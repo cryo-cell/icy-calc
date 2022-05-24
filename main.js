@@ -20,6 +20,9 @@ buttons.map( button => {
                     display.innerText = "Error!";
                 }
                 break;
+             case '+/-':
+                 display.innerText = '/';
+                break;
             default:
                 display.innerText += e.target.innerText;
         }
@@ -34,10 +37,15 @@ buttons.map( button => {
 
 
 window.addEventListener("keydown", function(event) {
-    let displayRegex = /\d/g;
+    let displayRegex = /^\d+|[*|+|-|/|.]/g;
     let result = event.key.match(displayRegex);
-    if (event.key === "Backspace") {
-        display.innerText = display.innerText.slice(0, -1);} else if(result) {
+    if (event.key === "c") {
+        display.innerText = '';}
+    else if (event.key === "Enter") {
+        display.innerText = eval(display.innerText);}
+    else if (event.key === "Backspace") {
+        display.innerText = display.innerText.slice(0, -1);} 
+    else if(result) {
         display.innerText += `${event.key}`;
         display.appendChild(display.innerText);} return false;
   }, true);
