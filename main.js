@@ -12,8 +12,12 @@ buttons.map( button => {
                 display.innerText = display.innerText.slice(0, -1);
             break;
             case '=':
-                display.innerText = eval(display.innerText);
-            break;
+                try {
+                    display.innerText = eval(display.innerText);
+                } catch {
+                    display.innertext = "Error";
+                }
+                break;
             default:
                 display.innerText += e.target.innerText;
         }
