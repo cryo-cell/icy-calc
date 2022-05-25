@@ -15,11 +15,18 @@
 #display {
     display: grid;
     background-color: aliceblue;
-    justify-content: center;
+    justify-content: end;
     align-items: end;    
     height: 100px;
     border-radius: 25px;
-    font-size: 35px;
+}
+
+#previous-operand {
+    font-size: 1.5rem;  
+}
+
+#current-operand {
+    font-size: 2.5rem;
 }
 
 .button {
