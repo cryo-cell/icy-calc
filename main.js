@@ -16,6 +16,10 @@ buttons.map( button => {
 
                 current.innerText = '';
             break;
+            case 'CE':
+
+                current.innerText = current.innerText.slice(0, -1);
+            break;
             case '←':
                 if(current.innerText){
                 current.innerText = current.innerText.slice(0, -1);
@@ -90,7 +94,9 @@ window.addEventListener("keydown", (event) => {
             previous.innerText = '';
         break;
         case "Backspace":
+            if (current.innerText){
             current.innerText = current.innerText.slice(0, -1);
+            } previous.innerText = previous.innerText.slice(0, -1);
         break;
         case "c":
             previous.innerText ='';
