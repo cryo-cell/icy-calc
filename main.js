@@ -17,12 +17,15 @@ buttons.map( button => {
     button.addEventListener('click', (e) => {
         //our eventListener is waiting for a click on an element with the class of button
         switch(e.target.innerText) {
+            case "(":
+                current.innerText += '(';
+            break;
             case 'C':
                 previous.innerText = '';
                 current.innerText = '';
             break;
-            case 'CE':
-                current.innerText = current.innerText.slice(0, -1);
+            case ')':
+                current.innerText += ")";
             break;
             case '←':
                 if(current.innerText) {
@@ -66,15 +69,13 @@ buttons.map( button => {
 //here we are adding an eventlistener to the window
 window.addEventListener("keydown", (event) => {
 //the eventlistenter is waiting for keyboard input after which an event will take place
-    let displayRegex = /^\d+|[*|+|-|/|.]/g;
+    let displayRegex = /^\d+|[*|+|-|/|.|(|)]/g;
     let result = event.key.match(displayRegex);
 //here we are using a switch statement to update our display depending on the key value of the event 
     switch(event.key){
         case "+":
-            if (result){
             previous.innerText += current.innerText + event.key;
             current.innerText = '';
-            }
             break; 
         case "-":
             previous.innerText += current.innerText + event.key;
