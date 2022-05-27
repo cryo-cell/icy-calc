@@ -1,7 +1,9 @@
 let display = document.getElementById('display');
 let current = document.getElementById('current-operand');
 
-let previous = document.getElementById('previous-operand');
+const previous = document.getElementById('previous-operand');
+
+const arr = Array.from(previous);
 
 
 let buttons = Array.from(document.getElementsByClassName('button'));
@@ -11,6 +13,7 @@ buttons.map( button => {
         switch(e.target.innerText) {
             case 'C':
                 previous.innerText = '';
+
                 current.innerText = '';
             break;
             case '←':
@@ -20,16 +23,32 @@ buttons.map( button => {
             break;
             case '=':
                 try {
-                    display.innerText = eval(display.innerText);
+                    current.innerText = eval(display.innerText);
+                    previous.innerText = '';  
+                    
+                    
                 } catch {
                     display.innerText = "Error!";
                 }
                 break;
              case '+/-':
-                 display.innerText = '/';
+                previous.innerText += current.innerText + '/';
+                current.innerText = '';
+                break;
+                 case '+':
+                    previous.innerText += current.innerText + '+';
+                    current.innerText = '';
+                    break;
+                     case '-':
+                        previous.innerText += current.innerText + '-';
+                        current.innerText = '';
+                        break;
+                         case '*':
+                            previous.innerText += current.innerText + '*';
+                            current.innerText = '';
                 break;
             default:
-                display.innerText += e.target.innerText;
+                current.innerText += e.target.innerText;
         }
     });
 
@@ -41,26 +60,50 @@ buttons.map( button => {
 
 
 
-window.addEventListener("keydown", function(event) {
+
+window.addEventListener("keydown", (event) => {
+    
     let displayRegex = /^\d+|[*|+|-|/|.]/g;
     let result = event.key.match(displayRegex);
-   
-    if ((event.key === "+" || event.key === "*" || event.key === "/" || event.key === "-") && previous.innerText === '') {
-        previous.innerText = current.innerText + event.key;
-        current.innerText = '';
-    }
-    else if (event.key === "Enter") {
-        current.innerText = eval(display.innerText);
-        previous.innerText = '';
-    }
-    else if (event.key === "Backspace") {
-        current.innerText = current.innerText.slice(0, -1);} 
-        else if (event.key === "c") {
+
+    switch(event.key){
+        case "+":
+            if (result){
+            previous.innerText += current.innerText + event.key;
+            current.innerText = '';
+            }
+            break; 
+        case "-":
+            previous.innerText += current.innerText + event.key;
+            current.innerText ='';
+            break; 
+        case "/":
+            previous.innerText += current.innerText + event.key;
+            current.innerText ='';
+            break; 
+        case "*":
+            previous.innerText += current.innerText + event.key;
+            current.innerText ='';
+            break;  
+        case "Enter":
+            current.innerText = eval(display.innerText);
+            previous.innerText = '';
+        break;
+        case "Backspace":
+            current.innerText = current.innerText.slice(0, -1);
+        break;
+        case "c":
             previous.innerText ='';
             current.innerText = '';
-        }   
-        else if(result) {
-        current.innerText += `${event.key}`;
-        display.appendChild(display.innerText);} return event.key;
-  }, true);
+        break;
+        default:
+            if (result) {
+                current.innerText += event.key;
+            }
+        
+
+    }
+}, true);
+
+  
   
